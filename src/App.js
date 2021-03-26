@@ -1,29 +1,51 @@
-// Import dependencies
-import React, { useRef, useState, useEffect } from "react";
-import * as tf from "@tensorflow/tfjs";
-// 1. TODO - Import required model here
-// e.g. import * as tfmodel from "@tensorflow-models/tfmodel";
+import React, { useRef, useEffect, useState } from "react";
+// import * as tf from "@tensorflow/tfjs";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import "./App.css";
-// 2. TODO - Import drawing utility here
-// e.g. import { drawRect } from "./utilities";
-import { drawRect } from "./utilities";
+// import { drawRect } from "./utilities";
 
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const [objectName, setObjectName] = useState(null);
 
   // Main function
   const runCoco = async () => {
-    // 3. TODO - Load network 
-    // e.g. const net = await cocossd.load();
+    // Load network
     const net = await cocossd.load();
-    
+
     //  Loop and detect hands
     setInterval(() => {
       detect(net);
     }, 10);
+  };
+
+  const drawRect = (detections, ctx) => {
+    // Loop through each prediction
+    detections.forEach((prediction) => {
+      // Extract boxes and classes
+      const [x, y, width, height] = prediction["bbox"];
+      const text = prediction["class"];
+      const accuracy = prediction["score"];
+
+      // Set styling
+      const color = "#51ff0d";
+      ctx.strokeStyle = color;
+      ctx.fillStyle = color;
+      ctx.lineWidth = 3;
+      ctx.font = "36px Arial";
+
+      // Draw rectangles and text
+      ctx.beginPath();
+      ctx.fillText(`${Math.floor(accuracy * 100)}%`, x, y - 10);
+      ctx.fillText(text, x + 85, y - 10);
+      ctx.rect(x, y, width, height);
+      ctx.stroke();
+
+      // Set object name state
+      setObjectName(text);
+    });
   };
 
   const detect = async (net) => {
@@ -46,16 +68,14 @@ function App() {
       canvasRef.current.width = videoWidth;
       canvasRef.current.height = videoHeight;
 
-      // 4. TODO - Make Detections
-      // e.g. const obj = await net.detect(video);
+      // Make Detections
       const obj = await net.detect(video);
 
       // Draw mesh
       const ctx = canvasRef.current.getContext("2d");
 
-      // 5. TODO - Update drawing utility
-      // drawSomething(obj, ctx)
-      drawRect(obj, ctx); 
+      // Update drawing utility
+      drawRect(obj, ctx);
     }
   };
 
@@ -63,44 +83,47 @@ function App() {
   // const videoConstraints = {
   //   facingMode: { exact: "user" }
   // };
-
-  useEffect(()=>{runCoco()},[]);
+  useEffect(() => {
+    runCoco();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <Webcam
-          ref={webcamRef}
-          muted={true}
-          // videoConstraints={videoConstraints}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
-        />
-
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 8,
-            width: 640,
-            height: 480,
-          }}
-        />
-      </header>
+      <header className="App-header">NoonGil</header>
+      <div className="App-content">
+        <div className="Video-wrapper">
+          <Webcam
+            ref={webcamRef}
+            muted={true}
+            // videoConstraints={videoConstraints}
+            style={{
+              textAlign: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          />
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              textAlign: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </div>
+        <div className="Text-wrapper">
+          <div className="Text-bubble">
+            <p className="Text-paragraph">
+              Hey NoonGil, please describe what's that in front of me?
+            </p>
+          </div>
+        </div>
+        <div className="Text-paragraph-wrapper">{objectName}</div>
+      </div>
     </div>
   );
 }

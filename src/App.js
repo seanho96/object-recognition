@@ -85,12 +85,12 @@ function App() {
   // };
   useEffect(() => {
     runCoco();
+    document.title = "NoonGil";
     // eslint-disable-next-line
   }, []);
 
   return (
     <div className="App">
-      <header className="App-header">NoonGil</header>
       <div className="App-content">
         <div className="Video-wrapper">
           <Webcam

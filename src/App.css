@@ -3,20 +3,9 @@
   background-color: #282c34;
 }
 
-.App-header {
-  background-color: #181a1f;
-  color: #ffffff;
-  height: 48px;
-  display: flex;
-  padding: 0 16px;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-}
-
 .App-content {
   background-color: #282c34;
-  min-height: calc(100vh - 48px);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,9 +52,6 @@
 }
 
 @media (max-width: 965px) {
-  .App-header {
-    font-size: 24px;
-  }
   .Video-wrapper {
     width: 90%;
     height: unset;
@@ -80,11 +66,7 @@
 }
 
 @media (max-width: 680px) {
-  .App-header {
-    font-size: 20px;
-    height: 40px;
-  }
   .App-content {
-    min-height: calc(100vh - 20px);
+    min-height: 100vh;
   }
 }

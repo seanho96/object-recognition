@@ -85,7 +85,6 @@ function App() {
   // };
   useEffect(() => {
     runCoco();
-    document.title = "NoonGil";
     // eslint-disable-next-line
   }, []);
 

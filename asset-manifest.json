@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/object-recognition/static/css/main.701ba600.chunk.css",
-    "main.js": "/object-recognition/static/js/main.84a679bf.chunk.js",
-    "main.js.map": "/object-recognition/static/js/main.84a679bf.chunk.js.map",
+    "main.js": "/object-recognition/static/js/main.0cb1aa11.chunk.js",
+    "main.js.map": "/object-recognition/static/js/main.0cb1aa11.chunk.js.map",
     "runtime-main.js": "/object-recognition/static/js/runtime-main.03cbbc58.js",
     "runtime-main.js.map": "/object-recognition/static/js/runtime-main.03cbbc58.js.map",
-    "static/js/2.360f30c9.chunk.js": "/object-recognition/static/js/2.360f30c9.chunk.js",
-    "static/js/2.360f30c9.chunk.js.map": "/object-recognition/static/js/2.360f30c9.chunk.js.map",
+    "static/js/2.ee4f4477.chunk.js": "/object-recognition/static/js/2.ee4f4477.chunk.js",
+    "static/js/2.ee4f4477.chunk.js.map": "/object-recognition/static/js/2.ee4f4477.chunk.js.map",
     "index.html": "/object-recognition/index.html",
     "static/css/main.701ba600.chunk.css.map": "/object-recognition/static/css/main.701ba600.chunk.css.map",
-    "static/js/2.360f30c9.chunk.js.LICENSE.txt": "/object-recognition/static/js/2.360f30c9.chunk.js.LICENSE.txt"
+    "static/js/2.ee4f4477.chunk.js.LICENSE.txt": "/object-recognition/static/js/2.ee4f4477.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.03cbbc58.js",
-    "static/js/2.360f30c9.chunk.js",
+    "static/js/2.ee4f4477.chunk.js",
     "static/css/main.701ba600.chunk.css",
-    "static/js/main.84a679bf.chunk.js"
+    "static/js/main.0cb1aa11.chunk.js"
   ]
 }

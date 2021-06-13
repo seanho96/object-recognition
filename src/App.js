@@ -9,6 +9,7 @@ function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [objectName, setObjectName] = useState(null);
+  const [isInitialised, setInitialised] = useState(false);
 
   // Main function
   const runCoco = async () => {
@@ -83,25 +84,38 @@ function App() {
   // const videoConstraints = {
   //   facingMode: { exact: "user" }
   // };
+
   useEffect(() => {
     runCoco();
+
+    const initWebcam = setTimeout(() => setInitialised(true), 2500);
+
+    return () => clearTimeout(initWebcam);
     // eslint-disable-next-line
   }, []);
+
+  const WebcamWrapper = () => {
+    return isInitialised ? (
+      <Webcam
+        ref={webcamRef}
+        muted={true}
+        // videoConstraints={videoConstraints}
+        style={{
+          textAlign: "center",
+          width: "100%",
+          height: "100%",
+        }}
+      />
+    ) : (
+      <div>Initialising your camera...</div>
+    );
+  };
 
   return (
     <div className="App">
       <div className="App-content">
         <div className="Video-wrapper">
-          <Webcam
-            ref={webcamRef}
-            muted={true}
-            // videoConstraints={videoConstraints}
-            style={{
-              textAlign: "center",
-              width: "100%",
-              height: "100%",
-            }}
-          />
+          <WebcamWrapper />
           <canvas
             ref={canvasRef}
             style={{

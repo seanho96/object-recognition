@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-// import * as tf from "@tensorflow/tfjs";
+import * as tf from "@tensorflow/tfjs";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import "./App.css";
@@ -107,7 +107,9 @@ function App() {
         }}
       />
     ) : (
-      <div>Initialising your camera...</div>
+      <div className="Initialise-wrapper">
+        <div>Initialising your camera...</div>
+      </div>
     );
   };
 
